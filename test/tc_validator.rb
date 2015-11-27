@@ -8,8 +8,7 @@ class TestValidator < Test::Unit::TestCase
     # When I validate some valid yaml
     input_config = YAML.load_file('test/vpn-configuration-example.yaml')
     errors = Vpnconfig::Validator.new.validate_yaml(input_config)
-    puts 'Errors:'
-    errors.each{|e| puts "#{e.message}"}
+
 
     # Then error arrays should be empty
     assert(errors.empty?, 'There should be no errors, but errors were found')
@@ -19,8 +18,7 @@ class TestValidator < Test::Unit::TestCase
     # When I validate some invalid yaml
     input_config = YAML.load_file('test/invalid-vpn-configuration-example.yaml')
     errors = Vpnconfig::Validator.new.validate_yaml(input_config)
-    puts 'Errors:'
-    errors.each{|e| puts "#{e.message}"}
+
 
     # Then relevant errors should be returned
     assert(errors[0].path == '/0/iShouldntBeHere', 'iShouldntBeHere key should have be identified as an error with the correct path')
